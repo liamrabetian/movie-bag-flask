@@ -1,1 +1,1 @@
-from .movie import movies
+from .movie_blueprint import movies
