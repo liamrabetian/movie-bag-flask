@@ -7,13 +7,13 @@ class Movie(db.Document):
     name = db.StringField(required=True, unique=True)
     casts = db.ListField(db.StringField(), required=True)
     genres = db.ListField(db.StringField(), required=True)
-    added_by = db.RefrenceField('User')
+    added_by = db.ReferenceField('User')
 
 
 class User(db.Document):
     email = db.EmailField(required=True, unique=True)
     password = db.StringField(required=True)
-    movies = db.ListField(db.RefrenceField('Movie', reverse_delete_rule=db.PULL))
+    movies = db.ListField(db.ReferenceField('Movie', reverse_delete_rule=db.PULL))
 
     def hash_password(self):
         self.password = generate_password_hash(self.password).decode('utf-8')
